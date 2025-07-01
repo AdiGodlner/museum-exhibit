@@ -6,8 +6,8 @@ import * as THREE from 'three';
 export class FpCamera extends THREE.PerspectiveCamera{
 
 
-
-    constructor(fov = 75, aspect = window.innerWidth / window.innerHeight, near = 0.1, far = 1000) {
+    
+    constructor(fov = 75, aspect = window.innerWidth / window.innerHeight, near = 0.01, far = 1000) {
         super(fov, aspect, near, far);
 
         this.pitchObject = new THREE.Object3D();
@@ -20,6 +20,7 @@ export class FpCamera extends THREE.PerspectiveCamera{
 
 
     setPosition(x, y, z) {
+        console.log("setting position")
         this.yawObject.position.set(x, y, z);
     }
 
@@ -43,8 +44,6 @@ export class FpCamera extends THREE.PerspectiveCamera{
 
 }
 
-
-
 export function createAndInitCamera(scene){
 
     const camera = new FpCamera(74, 
@@ -53,7 +52,8 @@ export function createAndInitCamera(scene){
         1000
     );
     
-    camera.setPosition(0,0,5);
+    camera.setPosition(0,1.7,-5);
+    camera.rotateY(Math.PI);
     scene.add(camera.controlObject);
     return camera;
 }

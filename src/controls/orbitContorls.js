@@ -10,4 +10,5 @@ export function createOrbitalControls(camera, canvas){
     controls.enabled = false;
 
     return controls
+    
 }

@@ -1,31 +1,27 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
-export function initLoader(scene){
-
-    
+export function initLoader(scene) {
     const loader = new GLTFLoader();
-    loader.load("/foo.glb", 
-    function(gltf){
-        scene.add(gltf.scene);
-    },
-    undefined,
-    function (error){
-        console.warn("error loading example")
-        console.warn(error);
-    }
-    );
+    const foo = "/sukha_v8.glb";
+    
+    loader.load(foo,
+        function (gltf) {
+            gltf.scene.traverse(function (child) {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
 
-    loader.load("/sukha.glb", 
-    function(gltf){
-        scene.add(gltf.scene);
-    },
-    undefined,
-    function (error){
-        console.warn("error loading sukha")
-        console.warn(error);
-    }
-    );
+                    // Optionally improve performance
+                    child.frustumCulled = true;
+                }
+            });
 
-
+            scene.add(gltf.scene);
+        },
+        undefined,
+        function (error) {
+            console.warn("error loading sukha");
+            console.warn(error);
+        });
 }

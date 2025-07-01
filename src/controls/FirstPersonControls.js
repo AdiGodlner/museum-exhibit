@@ -18,6 +18,7 @@ export class FPCameraControl {
         this.keys = {};
 
         this._bindEventListeners();
+        
     }
 
 
@@ -48,6 +49,14 @@ export class FPCameraControl {
         document.addEventListener('keyup', (e) => {
             this.keys[e.key.toLowerCase()] = false;
         });
+    }
+
+    setMoveSpeed(val){
+        this.moveSpeed = val;
+    }
+
+    setMouseSensitivity(val){
+        this.mouseSensitivity = val;
     }
 
     update(delta) {
